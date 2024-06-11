@@ -3,8 +3,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { delUser } from './UserReducer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UilUserPlus,UilEdit, UilFileTimesAlt } from '@iconscout/react-unicons'; //->import icona iconscout usata al pulsante di creazione
+import axios from 'axios'
+
 
 function Home() {
 
@@ -24,6 +26,13 @@ function Home() {
   aggiungendo un gestore di eventi onClick ai bottoni bottone sotto nella tabella nel map.*/
     const [selectedUser, setSelectedUser] = useState("");
   /* ------- */
+
+  const [userss, setUserss] = useState([])
+  useEffect(() => {
+    axios.get('http://localhost:3001/getUsers')
+    .then(users => setUserss(users.data))
+    .catch(err => console.log("c'è un cazzo di errore", err))
+  }, [])
 
 
   return (
@@ -62,6 +71,30 @@ function Home() {
             
         </tbody>
       </table>
+
+      {/* nmongo db */}
+      <div>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Cognome</th>
+              <th scope="col">eta</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              userss.map(u => (
+                <tr >
+                  <td>{u.nome}</td>
+                  <td>{u.cognome}</td>
+                  <td>{u.eta}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
 
       {/* Modale a comparsa --- 
       Di seguito usiamo selectedUser tramite useState per mostrare il nome e l'email dell'utente selezionato nella modale.*/}
