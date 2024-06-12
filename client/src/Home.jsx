@@ -28,9 +28,10 @@ function Home() {
   /* ------- */
 
   
+  // MONGO DB 
   const [usersi, setUsersi] = useState([])
 
-  useEffect(() => {
+  useEffect(() => { //usiamo la libreria axios installandola e importandola con require
     axios.get('http://127.0.0.1:3001/')
     .then(users => setUsersi(users.data))
     .catch(err => console.log("erroreeee: ", err))
