@@ -27,12 +27,14 @@ function Home() {
     const [selectedUser, setSelectedUser] = useState("");
   /* ------- */
 
-  const [userss, setUserss] = useState([])
+  
+  const [usersi, setUsersi] = useState([])
+
   useEffect(() => {
-    axios.get('http://localhost:3001/getUsers')
-    .then(users => setUserss(users.data))
-    .catch(err => console.log("c'è un cazzo di errore", err))
-  }, [])
+    axios.get('http://127.0.0.1:3001/')
+    .then(users => setUsersi(users.data))
+    .catch(err => console.log("erroreeee: ", err))
+  }, []);
 
 
   return (
@@ -40,7 +42,7 @@ function Home() {
 
       <h2 className='text-center mt-5'>Crud app with json server</h2>
 
-      <Link to={"/create"} className='btn btn-succes my-3 bg-success text-white'>Aggiungi <UilUserPlus /></Link>
+      <Link to={"/create"} className='btn btn-succes my-3 bg-success text-white'>Aggiungi {/* <UilUserPlus /> */}</Link>
       <table className="table" >
         <thead>
             <tr>
@@ -51,19 +53,18 @@ function Home() {
             </tr>
         </thead>
         <tbody>
-
           {users.map((user, index) => (
             <tr key={index}>
               <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                <Link to={`/edit/${user.id}`} className='btn btn-sm btn-primary'>Modifica<UilEdit /></Link>
+                <Link to={`/edit/${user.id}`} className='btn btn-sm btn-primary'>Modifica{/* <UilEdit /> */}</Link>
 
                 {/* Button trigger modal ----
                 quando il bottone viene cliccato, setSelectedUser(user) viene chiamato con l'oggetto user corrente. */}
                 <button type="button" className="btn btn-sm btn-danger ms-3" onClick={() => setSelectedUser(user)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Elimina<UilFileTimesAlt />
+                  Elimina{/* <UilFileTimesAlt /> */}
                 </button>
               </td>
             </tr>
@@ -72,29 +73,43 @@ function Home() {
         </tbody>
       </table>
 
-      {/* nmongo db */}
+      {/* mongo db */}
       <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Cognome</th>
-              <th scope="col">eta</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              userss.map(u => (
-                <tr >
-                  <td>{u.nome}</td>
-                  <td>{u.cognome}</td>
-                  <td>{u.eta}</td>
+        <h2 className='text-center mt-5'>Crud app with MongoDB server</h2>
+        <p>Numero elementi: {usersi.length}</p>
+        {usersi.length == 0 ? (
+          <p>Caricamento utenti in corso...</p> // Messaggio di caricamento mentre i dati vengono recuperati
+        ) : (
+          <div>
+            <table className="table">
+              <thead>
+                <tr>
+                  {/* <th scope="col">ID</th> */}
+                  <th scope="col">Nome</th>
+                  <th scope="col">Cognome</th>
+                  <th scope="col">eta</th>
                 </tr>
-              ))
-            }
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {
+                  usersi.map(u => {
+                    return (
+                      <tr key={u._id}>
+                        {/* <td>{u._id}</td> */}
+                        <td>{u.nome}</td>
+                        <td>{u.cognome}</td>
+                        <td>{u.eta}</td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
+
+      
 
       {/* Modale a comparsa --- 
       Di seguito usiamo selectedUser tramite useState per mostrare il nome e l'email dell'utente selezionato nella modale.*/}
