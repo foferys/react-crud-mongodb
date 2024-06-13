@@ -4,8 +4,7 @@ const mongoose = require("mongoose")
 // database
 const userSchema = new mongoose.Schema({
     nome: String,
-    cognome: String,
-    eta: Number,
+    email: String,
 })
 
 // creaiamo il model che prende 2 parametri -> il nome della tabella e lo schema creato

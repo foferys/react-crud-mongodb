@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 // import dello slice userReducer.jsx ->assegnato poi sotto nel reducer dello store
 import UserReducer from './UserReducer.jsx'
+import UserReducer2 from './UserReducer2.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -15,7 +16,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 /* user reducer */
 const store = configureStore({
   reducer: {
-    users:  UserReducer
+    users:  UserReducer,
+    mongousers:  UserReducer2,
   }
 })
 

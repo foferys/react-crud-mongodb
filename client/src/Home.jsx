@@ -6,13 +6,15 @@ import { delUser } from './UserReducer';
 import { useEffect, useState } from 'react';
 import { UilUserPlus,UilEdit, UilFileTimesAlt } from '@iconscout/react-unicons'; //->import icona iconscout usata al pulsante di creazione
 import axios from 'axios'
-
+import { fetchUsers } from './UserReducer2';
+import { resetStatus } from './UserReducer2';
 
 function Home() {
 
+  const dispatch = useDispatch();
+
   const users = useSelector((state) => state.users);
   // console.log(users);
-  const dispatch = useDispatch();
 
   const handleDelete = (idEl) => {
     // alert(typeof(idEl));
@@ -28,14 +30,57 @@ function Home() {
   /* ------- */
 
   
-  // MONGO DB 
-  const [usersi, setUsersi] = useState([])
+  // MONGO DB senza usare reducer
+  // const [usersi, setUsersi] = useState([])
 
-  useEffect(() => { //usiamo la libreria axios installandola e importandola con require
-    axios.get('http://127.0.0.1:3001/')
-    .then(users => setUsersi(users.data))
-    .catch(err => console.log("erroreeee: ", err))
-  }, []);
+  // useEffect(() => { //usiamo la libreria axios installandola e importandola con require
+  //   axios.get('http://127.0.0.1:3001/')
+  //   .then(users => setUsersi(users.data))
+  //   .catch(err => console.log("erroreeee: ", err))
+  // }, []);
+
+  // MONGO DB usando useSelector col reducer2
+    const mongousers = useSelector((state) => state.mongousers.usersi);
+    const error = useSelector((state) => state.mongousers.error); 
+    
+    const status = useSelector((state) => state.mongousers.status);
+    /* L'azione fetchUsers viene dispatciata quando il componente viene montato (ovvero, quando viene caricato per la prima volta). 
+    1): 
+    Quando il componente Home.jsx viene montato, la funzione useEffect viene eseguita.
+    Verifica se lo stato status è 'idle'. Se lo è, dispatcia l'azione fetchUsers.
+    2)
+    :L'azione fetchUsers viene eseguita con una richiesta HTTP per recuperare i dati dal server e viene dispatciata automaticamente 
+    l'azione fetchUsers.pending, che aggiorna lo stato status a 'loading'. 
+    3):
+    Se la richiesta ha successo, viene dispatciata l'azione fetchUsers.fulfilled con i dati recuperati.
+    Il reducer per fetchUsers.fulfilled viene eseguito, aggiornando state.status a 'succeeded' e state.usersi con action.payload 
+    (i dati recuperati). Se la richiesta fallisce, viene dispatciata l'azione fetchUsers.rejected, aggiornando state.status a 
+    'failed' e state.error con il messaggio di errore.
+    */
+    useEffect(() => {
+      if (status === 'idle') {
+        dispatch(fetchUsers());  // Dispatcia l'azione fetchUsers
+      }
+    }, [status, dispatch]);/*L'array di dipendenze passato come secondo argomento a useEffect determina quando l'effetto viene rieseguito. 
+    Se uno degli elementi dell'array di dipendenze cambia, l'effetto viene rieseguito.
+    Quando fetchUsers viene dispatciata, lo stato status cambia da 'idle' a 'loading'. Poiché status è cambiato, useEffect non viene 
+    rieseguito automaticamente dopo questo aggiornamento (a meno che status cambi nuovamente).*/
+
+    if (status === 'loading') {
+      return <div>Loading...</div>;
+    }
+
+    if (status === 'failed') {
+      // return <div>Error: {error}</div>;
+      // se c'è un errore lo mostro nella console, se faccio return come sopra lo ritorna come pagina 
+      console.log("Errore: ", error)
+    }
+    //reimposta lo status a idle per aggiornare la richiesta server (prova)
+    const handleRetry = () => {
+      dispatch(resetStatus())
+    }
+  // -------
+
 
 
   return (
@@ -76,9 +121,12 @@ function Home() {
 
       {/* mongo db */}
       <div>
-        <h2 className='text-center mt-5'>Crud app with MongoDB server</h2>
-        <p>Numero elementi: {usersi.length}</p>
-        {usersi.length == 0 ? (
+        <h2 className='text-center mt-5'>Crud app with MongoDB server (UserReducer2)</h2>
+        <p>Numero elementi: {mongousers.length}</p>
+
+          <button onClick={handleRetry} className='btn btn-primary'>Reset status</button>
+
+        {mongousers.length == 0 ? (
           <p>Caricamento utenti in corso...</p> // Messaggio di caricamento mentre i dati vengono recuperati
         ) : (
           <div>
@@ -87,22 +135,21 @@ function Home() {
                 <tr>
                   {/* <th scope="col">ID</th> */}
                   <th scope="col">Nome</th>
-                  <th scope="col">Cognome</th>
-                  <th scope="col">eta</th>
+                  <th scope="col">Email</th>
                 </tr>
               </thead>
               <tbody>
                 {
-                  usersi.map(u => {
-                    return (
-                      <tr key={u._id}>
-                        {/* <td>{u._id}</td> */}
-                        <td>{u.nome}</td>
-                        <td>{u.cognome}</td>
-                        <td>{u.eta}</td>
-                      </tr>
+                  mongousers.map(u => (/* Quando si utilizza una funzione a corpo pieno con parentesi graffe {}, è necessario utilizzare 
+                    return per restituire il valore, mentre con le tonde  si può omettere il return e le parentesi graffe, 
+                    restituendo implicitamente l'elemento*/
+                    <tr key={u._id}>
+                      {/* <td>{u._id}</td> */}
+                      <td>{u.nome}</td>
+                      <td>{u.email}</td>
+                    </tr>
                     )
-                  })
+                  )
                 }
               </tbody>
             </table>
