@@ -69,10 +69,11 @@ function Home() {
     if (status === 'loading') {
       return <div>Loading...</div>;
     }
-
+    let statusFailed = false;
     if (status === 'failed') {
       // return <div>Error: {error}</div>;
       // se c'è un errore lo mostro nella console, se faccio return come sopra lo ritorna come pagina 
+      statusFailed =true;
       console.log("Errore: ", error)
     }
     //reimposta lo status a idle per aggiornare la richiesta server (prova)
@@ -126,8 +127,19 @@ function Home() {
 
           <button onClick={handleRetry} className='btn btn-primary'>Reset status</button>
 
-        {mongousers.length == 0 ? (
-          <p>Caricamento utenti in corso...</p> // Messaggio di caricamento mentre i dati vengono recuperati
+        {(mongousers.length == 0 || statusFailed == true) ? (
+          // Messaggio di caricamento mentre i dati vengono recuperati
+          <>
+          <div className='d-flex'>
+            <p>Controlla la connessione del server</p> 
+            <div className="loadin mx-2">
+              <div className="loading-bar"></div>
+              <div className="loading-bar"></div>
+              <div className="loading-bar"></div>
+              <div className="loading-bar"></div>
+            </div>
+          </div>
+          </>
         ) : (
           <div>
             <table className="table">

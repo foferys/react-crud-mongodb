@@ -13,16 +13,16 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 const mongoUserSlice = createSlice({
     name: 'mongousers',
     initialState: { /* L'array vuoto usersi viene utilizzato per inizializzare lo stato del reducer nello slice. 
-        In altre parole, è il valore predefinito per usersi prima che i dati vengano recuperati dal server.  */
-        usersi: [], // Stato iniziale come array vuoto
-        status: 'idle', // Stato iniziale per il caricamento
-        error: null, // Stato iniziale per gli errori
+      In altre parole, è il valore predefinito per usersi prima che i dati vengano recuperati dal server.  */
+      usersi: [], // Stato iniziale come array vuoto
+      status: 'idle', // Stato iniziale per il caricamento
+      error: null, // Stato iniziale per gli errori
     },
     reducers: {
-        resetStatus: (state) => {
-            state.status = "idle";
-            state.error = null;
-        }
+      resetStatus: (state) => {
+        state.status = "idle";
+        state.error = null;
+      }
       // definire altri reducers qui se necessario
     },
     //Includiamo fetchUsers nella proprietà extraReducers per gestire i diversi stati dell'azione asincrona(pending, fulfilled, rejected).
@@ -32,7 +32,7 @@ const mongoUserSlice = createSlice({
           state.status = 'loading';
         })
         .addCase(fetchUsers.fulfilled, (state, action) => {
-            // nel caso sia fetchUsers.fulfilled, imposto lo state a succeeded
+          // nel caso sia fetchUsers.fulfilled, imposto lo state a succeeded
           state.status = 'succeeded';
           state.usersi = action.payload;/* Aggiorna l'array con i dati recuperati -> contiene i dati recuperati dalla 
           richiesta HTTP, che sono passati automaticamente dall'azione thunk quando viene risolta con successo.
