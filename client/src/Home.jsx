@@ -134,7 +134,13 @@ function Home() {
 
         {/* mongo db */}
         <div>
-          <h2 className='text-center mt-5'>Crud app with MongoDB server (UserReducer2)</h2>
+
+          <motion.h2 className='text-center mt-5'
+            animate={{y:0, opacity:1}} 
+            initial={{opacity:0, y:"100%"}} 
+            transition={{ delay: 0.55, duration:0.5 }}
+            >Crud app with MongoDB server (UserReducer2)
+          </motion.h2>
           <p>Numero elementi: {mongousers.length}</p>
 
           <button onClick={handleRetry} className='btn btn-primary'>Reset status</button>
