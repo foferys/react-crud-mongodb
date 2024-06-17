@@ -2,6 +2,7 @@ import { useState } from "react"
 import { addUser } from "./UserReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { delay, motion } from "framer-motion";
 
 function Creazione() {
 
@@ -30,10 +31,20 @@ function Creazione() {
   }
 
   return (
-    <div className='d-flex w-100 vh-100 justify-content-center align-items-center'>
+    <motion.div className='d-flex w-100 vh-100 justify-content-center align-items-center' 
+    initial={{y: "100%"}}
+    animate={{y:"0%"}}
+    exit={{ opacity: 1 }}
+    transition={{ duration: 0.55, ease:"easeOut" }}
+    >
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <h2>Inserisci un nuovo utente</h2>  
+          <motion.h2 
+            animate={{y:0, opacity:1}} 
+            initial={{opacity:0, y:"100%"}} 
+            transition={{ delay: 0.3, duration:0.5 }}
+            >Inserisci un nuovo utente
+          </motion.h2>  
           <p id="messUserOk" className="nascosto text-success">utente inserito</p>
           <label htmlFor="name">Nome</label>
           <input type="text" className="form-control" name="name" value={name} onChange={e => setName(e.target.value)}  placeholder="il tuo nome"/>
@@ -47,7 +58,7 @@ function Creazione() {
         <br />
         <button type="submit" className="btn btn-primary">invia</button>
       </form>
-    </div>
+    </motion.div>
   )
 }
 

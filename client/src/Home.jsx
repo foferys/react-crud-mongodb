@@ -9,6 +9,8 @@ import axios from 'axios'
 import { fetchUsers } from './UserReducer2';
 import { resetStatus } from './UserReducer2';
 
+import {motion} from "framer-motion"
+
 function Home() {
 
   const dispatch = useDispatch();
@@ -85,91 +87,102 @@ function Home() {
 
 
   return (
-    <div className='container'>
+    <>
+      <motion.div className='container'
+        initial={{ y: "100% " }}
+        animate={{ y: "0%" }}
+        exit={{ opacity: 1 }}
+        transition={{ duration: 0.55, ease: "easeOut" }}
+      >
 
-      <h2 className='text-center mt-5'>Crud app with json server</h2>
+        <motion.h2 className='text-center mt-5'
+          animate={{y:0, opacity:1}} 
+          initial={{opacity:0, y:"100%"}} 
+          transition={{ delay: 0.3, duration:0.5 }}
+          >Crud app with json server
+        </motion.h2>
 
-      <Link to={"/create"} className='btn btn-succes my-3 bg-success text-white'>Aggiungi {/* <UilUserPlus /> */}</Link>
-      <table className="table" >
-        <thead>
+        <Link to={"/create"} className='btn btn-succes my-3 bg-success text-white'>Aggiungi {/* <UilUserPlus /> */}</Link>
+        <table className="table" >
+          <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Actions</th>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Actions</th>
             </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={index}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>
-                <Link to={`/edit/${user.id}`} className='btn btn-sm btn-primary'>Modifica{/* <UilEdit /> */}</Link>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={index}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <Link to={`/edit/${user.id}`} className='btn btn-sm btn-primary'>Modifica{/* <UilEdit /> */}</Link>
+                  {/* Button trigger modal ----quando il bottone viene cliccato, setSelectedUser(user) viene chiamato con 
+                  l'oggetto user corrente. */}
+                  <button type="button" className="btn btn-sm btn-danger ms-3" onClick={() => setSelectedUser(user)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Elimina{/* <UilFileTimesAlt /> */}
+                  </button>
+                </td>
+              </tr>
+            ))}
 
-                {/* Button trigger modal ----
-                quando il bottone viene cliccato, setSelectedUser(user) viene chiamato con l'oggetto user corrente. */}
-                <button type="button" className="btn btn-sm btn-danger ms-3" onClick={() => setSelectedUser(user)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Elimina{/* <UilFileTimesAlt /> */}
-                </button>
-              </td>
-            </tr>
-          ))}
-            
-        </tbody>
-      </table>
+          </tbody>
+        </table>
 
-      {/* mongo db */}
-      <div>
-        <h2 className='text-center mt-5'>Crud app with MongoDB server (UserReducer2)</h2>
-        <p>Numero elementi: {mongousers.length}</p>
+        {/* mongo db */}
+        <div>
+          <h2 className='text-center mt-5'>Crud app with MongoDB server (UserReducer2)</h2>
+          <p>Numero elementi: {mongousers.length}</p>
 
           <button onClick={handleRetry} className='btn btn-primary'>Reset status</button>
 
-        {(mongousers.length == 0 || statusFailed == true) ? (
-          // Messaggio di caricamento mentre i dati vengono recuperati
-          <>
-          <div className='d-flex'>
-            <p>Controlla la connessione del server</p> 
-            <div className="loadin mx-2">
-              <div className="loading-bar"></div>
-              <div className="loading-bar"></div>
-              <div className="loading-bar"></div>
-              <div className="loading-bar"></div>
-            </div>
-          </div>
-          </>
-        ) : (
-          <div>
-            <table className="table">
-              <thead>
-                <tr>
-                  {/* <th scope="col">ID</th> */}
-                  <th scope="col">Nome</th>
-                  <th scope="col">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  mongousers.map(u => (/* Quando si utilizza una funzione a corpo pieno con parentesi graffe {}, è necessario utilizzare 
+          {(mongousers.length == 0 || statusFailed == true) ? (
+            // Messaggio di caricamento mentre i dati vengono recuperati
+            <>
+              <div className='d-flex'>
+                <p>Controlla la connessione del server</p>
+                <div className="loadin mx-2">
+                  <div className="loading-bar"></div>
+                  <div className="loading-bar"></div>
+                  <div className="loading-bar"></div>
+                  <div className="loading-bar"></div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div>
+              <table className="table">
+                <thead>
+                  <tr>
+                    {/* <th scope="col">ID</th> */}
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    mongousers.map(u => (/* Quando si utilizza una funzione a corpo pieno con parentesi graffe {}, è necessario utilizzare 
                     return per restituire il valore, mentre con le tonde  si può omettere il return e le parentesi graffe, 
                     restituendo implicitamente l'elemento*/
-                    <tr key={u._id}>
-                      {/* <td>{u._id}</td> */}
-                      <td>{u.nome}</td>
-                      <td>{u.email}</td>
-                    </tr>
+                      <tr key={u._id}>
+                        {/* <td>{u._id}</td> */}
+                        <td>{u.nome}</td>
+                        <td>{u.email}</td>
+                      </tr>
                     )
-                  )
-                }
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+                    )
+                  }
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
 
-      
+      </motion.div>
+
 
       {/* Modale a comparsa --- 
       Di seguito usiamo selectedUser tramite useState per mostrare il nome e l'email dell'utente selezionato nella modale.*/}
@@ -192,9 +205,8 @@ function Home() {
           </div>
         </div>
       </div>
- 
-      
-    </div>
+    </>
+
   )
 }
 
