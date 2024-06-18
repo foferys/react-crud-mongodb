@@ -1,10 +1,4 @@
 
-<!-- [![Contributors][contributors-shield]][contributors-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url] -->
-
 <!-- 
     https://img.shields.io/badge/npm-v10.5.0-blue?logo=npm
     Il badge che hai menzionato segue una struttura specifica definita da Shields.io per creare badge personalizzati con testo, colore e logo. Ecco una spiegazione dettagliata della struttura utilizzata per creare badge come quello per React e Vite:
@@ -37,14 +31,14 @@ Color: blue
 Logo: react
 Questo URL genera un badge con il testo "react" a sinistra, "vite" a destra, un colore di sfondo blu e il logo di React.
  -->
-[![Contributors](https://img.shields.io/badge/contributors-1-46CC12)](#contributors--contr)
+[![Contributors](https://img.shields.io/badge/contributors-1-46CC12)](#contributors-)
 [![npm](https://img.shields.io/badge/npm-v10.5.0-5FA04E?logo=npm)](https://www.npmjs.com/)
 [![npm](https://img.shields.io/badge/nodeJs-v21.7.2-5FA04E?logo=nodedotjs)](https://nodejs.org/en)
 [![mongoose](https://img.shields.io/badge/mongoose-v8.4.1-880000?logo=mongoose&logoColor=880000&labelColor=515151)](https://www.npmjs.com/package/mongoose)
 [![nodemon](https://img.shields.io/badge/nodemon-v3.1.3-76D04B?logo=nodemon)](https://www.npmjs.com/package/nodemon)
 [![pp](https://img.shields.io/badge/Buy_me_a_coffee-3775A9?logo=paypal)](https://www.paypal.com/paypalme/foferys)
 
-## About The Project
+## About
 ![screenshot](./home.png)
 
 This web application is a basic exercise using React and React Router. The entire codebase is thoroughly commented to aid understanding and learning. The project demonstrates the use of two types of "servers":
@@ -56,7 +50,7 @@ In this application, you can add, modify, and delete users in the table, providi
 ##### Delete, add or edit users
 ![screenshot](./del.png)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#-about">back to top</a>)</p>
 
 
 ### Built With
@@ -100,7 +94,8 @@ $ npm install
 $ npm start
 ```
 
-## Contributors ✨ [![contr](https://img.shields.io/badge/contributors-1-46CC12)](#about-the-project)
+## Contributors ✨ 
+[![](https://img.shields.io/badge/contributors-1-46CC12)](# "Contributors")
 
 <!-- Thanks goes to these wonderful people -->
 
@@ -109,7 +104,7 @@ $ npm start
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="http://ivesvh.com"><img src="https://avatars.githubusercontent.com/u/123701797?v=4" width="100px;" alt="Gianpiero Ferraro"/><br /><sub><b>Gianpiero Ferraro</b>(always me lol)</sub></a><br />
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/gianpieroferraro"><img src="https://avatars.githubusercontent.com/u/123701797?v=4" width="100px;" alt="Gianpiero Ferraro"/><br /><sub><b>Gianpiero Ferraro</b>(always me lol)</sub></a><br />
       </td>
     </tr>
 </tbody>
