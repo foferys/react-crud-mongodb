@@ -37,69 +37,40 @@ Color: blue
 Logo: react
 Questo URL genera un badge con il testo "react" a sinistra, "vite" a destra, un colore di sfondo blu e il logo di React.
  -->
-
-<p align="center">
-  <a href="https://badge.fury.io/js/pomolectron">
-    <img src="https://img.shields.io/badge/npm-v10.5.0-5FA04E?logo=npm" alt="npm version" height="18">
-  </a>
-  <a href="https://badge.fury.io/js/pomolectron">
-    <img src="https://img.shields.io/badge/nodeJs-v21.7.2-5FA04E?logo=nodedotjs" alt="nodejs version" height="18">
-  </a>
-
-  <a href="https://www.paypal.me/AmitMerchant">
-    <img src="https://img.shields.io/badge/mongoose-v8.4.1-880000?logo=mongoose&logoColor=880000&labelColor=515151">
-  </a>
-  <a href="https://www.paypal.me/AmitMerchant">
-    <img src="https://img.shields.io/badge/nodemon-v3.1.3-76D04B?logo=nodemon">
-  </a>
-
-
-
-  <a href="https://www.paypal.com/paypalme/foferys">
-    <img src="https://img.shields.io/badge/Buy me a coffee-3775A9?logo=paypal">
-  </a>
-  
-</p>
+[![Contributors](https://img.shields.io/badge/contributors-1-46CC12)](#contributors--contr)
+[![npm](https://img.shields.io/badge/npm-v10.5.0-5FA04E?logo=npm)](https://www.npmjs.com/)
+[![npm](https://img.shields.io/badge/nodeJs-v21.7.2-5FA04E?logo=nodedotjs)](https://nodejs.org/en)
+[![mongoose](https://img.shields.io/badge/mongoose-v8.4.1-880000?logo=mongoose&logoColor=880000&labelColor=515151)](https://www.npmjs.com/package/mongoose)
+[![nodemon](https://img.shields.io/badge/nodemon-v3.1.3-76D04B?logo=nodemon)](https://www.npmjs.com/package/nodemon)
+[![pp](https://img.shields.io/badge/Buy_me_a_coffee-3775A9?logo=paypal)](https://www.paypal.com/paypalme/foferys)
 
 ## About The Project
+![screenshot](./home.png)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+This web application is a basic exercise using React and React Router. The entire codebase is thoroughly commented to aid understanding and learning. The project demonstrates the use of two types of "servers":
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+1. A server created from a JSON file containing the data.
+2. A local server with MongoDB connected to the React app.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+In this application, you can add, modify, and delete users in the table, providing a hands-on experience with CRUD operations.
+##### Delete, add or edit users
+![screenshot](./del.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ### Built With
 
 This section should list any major frameworks/libraries used to bootstrap your project.
 
-[![React][React.js]][React-url]
-[![ReactRouter][ReactRouter.js]][ReactRouter-url]
-[![Vite][Vite.js]][Vite-url]
-[![Bootstrap][Bootstrap.com]][Bootstrap-url]
+[![react redux](https://img.shields.io/badge/React_Redux-20232A?style=for-the-badge&logo=redux&logoColor=61DAFB)](https://reactjs.org/)
+[![react router dom](https://img.shields.io/badge/React_Router-gray?style=for-the-badge&logo=reactRouter&logoColor=CA4245)](https://reactrouter.com/en/main)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
+[![axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)](https://www.npmjs.com/package/axios)
+[![framer motion](https://img.shields.io/badge/Framer_motion-^11.2.10-5FA04E?style=for-the-badge)](https://www.npmjs.com/package/framer-motion)
+[![express](https://img.shields.io/badge/express-^4.19.2-5FA04E?style=for-the-badge)](https://www.npmjs.com/package/express)
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-
-[ReactRouter-url]: https://reactjs.org/
-[ReactRouter.js]: https://img.shields.io/badge/React|Router-gray?style=for-the-badge&logo=reactRouter&logoColor=CA4245
-
-[Vite.js]: https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white
-[Vite-url]: https://vitejs.dev/
-
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -112,22 +83,39 @@ To begin developing, do this:
 $ git@github.com:foferys/react-crud-mongodb.git
 ```
 
-### Install:
-_👀 client and server installation_
+### Install & Start:
+_👀 client and server installation & start_
 ```bash
 # Navigate to the client directory and install dependencies
-cd client
-npm install
+$ cd client
+$ npm install
+$ npm run dev
 
 # Navigate back to the root directory
-cd ..
+$ cd ..
 
 # Navigate to the server directory and install dependencies
-cd server
-npm install
+$ cd server
+$ npm install
+$ npm start
 ```
 
-**Start coding!** 🎉
+## Contributors ✨ [![contr](https://img.shields.io/badge/contributors-1-46CC12)](#about-the-project)
 
+<!-- Thanks goes to these wonderful people -->
+
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://ivesvh.com"><img src="https://avatars.githubusercontent.com/u/123701797?v=4" width="100px;" alt="Gianpiero Ferraro"/><br /><sub><b>Gianpiero Ferraro</b>(always me lol)</sub></a><br />
+      </td>
+    </tr>
+</tbody>
+</table>
+
+
+**Start coding!** 🎉
 
 
