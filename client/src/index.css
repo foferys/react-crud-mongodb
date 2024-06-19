@@ -1,13 +1,10 @@
 
 .nascosto {
-    display: none;
+  display: none;
 }
 
-.loadin {
-  
-}
 .loading-bar {
-    margin-right: 2px;
+  margin-right: 2px;
 }
 .loading-bar {
   display: inline-block;

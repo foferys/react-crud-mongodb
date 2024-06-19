@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { updateUser } from './UserReducer';
-
+import transition from './transitions';
+import { motion } from 'framer-motion';
 
 
 function Update() {
@@ -32,7 +33,12 @@ function Update() {
 
   
     return (
-        <div className='d-flex w-100 vh-100 justify-content-center align-items-center'>
+        <motion.div className='d-flex w-100 vh-100 justify-content-center align-items-center' 
+            initial={{y: "100%"}}
+            animate={{y:"0%"}}
+            exit={{ opacity: 1 }}
+            transition={{ duration: 0.55, ease:"easeOut" }}
+        >
             <form onSubmit={handleUpdate}>
                 <div className="form-group">
                     <h2>Modifica l'utente {name}</h2>  
@@ -49,8 +55,8 @@ function Update() {
                 <br />
                 <button type="submit" className="btn btn-primary">invia</button>
             </form>
-        </div>
+        </motion.div>
     );
   }
 
-export default Update;
+export default transition(Update);

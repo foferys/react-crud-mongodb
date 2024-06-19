@@ -10,6 +10,7 @@ import { fetchUsers } from './UserReducer2';
 import { resetStatus } from './UserReducer2';
 
 import {motion} from "framer-motion"
+import transition from './transitions';
 
 function Home() {
 
@@ -216,4 +217,4 @@ function Home() {
   )
 }
 
-export default Home
+export default transition(Home);

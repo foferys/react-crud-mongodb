@@ -3,6 +3,7 @@ import { addUser } from "./UserReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { delay, motion } from "framer-motion";
+import transition from "./transitions";
 
 function Creazione() {
 
@@ -62,4 +63,4 @@ function Creazione() {
   )
 }
 
-export default Creazione
+export default transition(Creazione)
