@@ -65,7 +65,7 @@ function Home() {
         dispatch(fetchUsers());  // Dispatcia l'azione fetchUsers
       }
       
-    },[], [status, dispatch]);/*L'array di dipendenze passato come secondo argomento a useEffect determina quando l'effetto viene rieseguito. 
+    }, [status, dispatch]);/*L'array di dipendenze passato come secondo argomento a useEffect determina quando l'effetto viene rieseguito. 
     Se uno degli elementi dell'array di dipendenze cambia, l'effetto viene rieseguito.
     Quando fetchUsers viene dispatciata, lo stato status cambia da 'idle' a 'loading'. Poiché status è cambiato, useEffect non viene 
     rieseguito automaticamente dopo questo aggiornamento (a meno che status cambi nuovamente).*/
@@ -90,11 +90,10 @@ function Home() {
     }
   // -------
 
-
-
+   
   return (
     <>
-      <motion.div className='container'
+      <motion.div className='container' //animazione del div che contiene tutto
         initial={{ y: "100% " }}
         animate={{ y: "0%" }}
         exit={{ opacity: 1 }}
