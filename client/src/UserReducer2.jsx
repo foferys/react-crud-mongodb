@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-/* Recupera i dati prima di inizializzare il slice nel tuo componente o all'interno di un'azione thunk utilizzando 
+/* Recupera i dati prima di inizializzare lo slice nel tuo componente o all'interno di un'azione thunk utilizzando 
 createAsyncThunk di Redux Toolkit. -> crea un thunk asincrono per recuperare i dati:*/
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
     //usiamo la libreria axios installandola e importandola

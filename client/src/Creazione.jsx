@@ -40,7 +40,7 @@ function Creazione() {
     >
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <motion.h2 
+          <motion.h2 className="text-center mt-5 text-3xl font-medium"
             animate={{y:0, opacity:1}} 
             initial={{opacity:0, y:"100%"}} 
             transition={{ delay: 0.3, duration:0.5 }}

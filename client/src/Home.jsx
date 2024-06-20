@@ -64,20 +64,25 @@ function Home() {
       if (status === 'idle') {
         dispatch(fetchUsers());  // Dispatcia l'azione fetchUsers
       }
-    }, [status, dispatch]);/*L'array di dipendenze passato come secondo argomento a useEffect determina quando l'effetto viene rieseguito. 
+      
+    },[], [status, dispatch]);/*L'array di dipendenze passato come secondo argomento a useEffect determina quando l'effetto viene rieseguito. 
     Se uno degli elementi dell'array di dipendenze cambia, l'effetto viene rieseguito.
     Quando fetchUsers viene dispatciata, lo stato status cambia da 'idle' a 'loading'. Poiché status è cambiato, useEffect non viene 
     rieseguito automaticamente dopo questo aggiornamento (a meno che status cambi nuovamente).*/
 
-    if (status === 'loading') {
+    /* if (status === 'loading') {
       return <div>Loading...</div>;
-    }
+    } */
+   
     let statusFailed = false;
     if (status === 'failed') {
       // return <div>Error: {error}</div>;
       // se c'è un errore lo mostro nella console, se faccio return come sopra lo ritorna come pagina 
-      statusFailed =true;
       console.log("Errore: ", error)
+      // imposto questa variabile a true e la uso sotto nel codice per mostrare uno skeleton
+      statusFailed =true;
+      // richiamo il dispatch per fare richieste
+      dispatch(fetchUsers());
     }
     //reimposta lo status a idle per aggiornare la richiesta server (prova)
     const handleRetry = () => {
@@ -96,7 +101,7 @@ function Home() {
         transition={{ duration: 0.55, ease: "easeOut" }}
       >
 
-        <motion.h2 className='text-center mt-5'
+        <motion.h2 className='text-center mt-5 text-3xl font-medium'
           animate={{y:0, opacity:1}} 
           initial={{opacity:0, y:"100%"}} 
           transition={{ delay: 0.3, duration:0.5 }}
@@ -136,20 +141,21 @@ function Home() {
         {/* mongo db */}
         <div>
 
-          <motion.h2 className='text-center mt-5'
+          <motion.h2 className='text-center mt-5 text-3xl font-medium'
             animate={{y:0, opacity:1}} 
             initial={{opacity:0, y:"100%"}} 
             transition={{ delay: 0.55, duration:0.5 }}
             >Crud app with MongoDB server (UserReducer2)
           </motion.h2>
-          <p>Numero elementi: {mongousers.length}</p>
-
+            
           <button onClick={handleRetry} className='btn btn-primary'>Reset status</button>
 
-          {(mongousers.length == 0 || statusFailed == true) ? (
-            // Messaggio di caricamento mentre i dati vengono recuperati
+          <p>Numero elementi: {mongousers.length}</p>
+          {(mongousers.length == 0 || status === "loading" || statusFailed) ? (
+            // Messaggio di caricamento mentre i dati vengono recuperati o se lo stato è failed
             <>
-              <div className='d-flex'>
+              <p>Controlla la connessione del server</p>
+              {/* <div className='d-flex'>
                 <p>Controlla la connessione del server</p>
                 <div className="loadin mx-2">
                   <div className="loading-bar"></div>
@@ -157,9 +163,42 @@ function Home() {
                   <div className="loading-bar"></div>
                   <div className="loading-bar"></div>
                 </div>
+              </div> */}
+              <br />
+              <div className="animate-pulse">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                        <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                      </th>
+                      <th scope="col">
+                        <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                      </td>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                      </td>
+                      <td>
+                        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </>
-          ) : (
+            ) : (
             <div>
               <table className="table">
                 <thead>
@@ -185,7 +224,8 @@ function Home() {
                 </tbody>
               </table>
             </div>
-          )}
+            )
+          }
         </div>
 
       </motion.div>

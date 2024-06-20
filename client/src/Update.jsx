@@ -41,7 +41,7 @@ function Update() {
         >
             <form onSubmit={handleUpdate}>
                 <div className="form-group">
-                    <h2>Modifica l'utente {name}</h2>  
+                    <h2 className='text-center mt-5 text-3xl font-medium'>Modifica l'utente {name}</h2>  
                     <p id="messUserOk" className="nascosto text-success">utente inserito</p>
                     <label htmlFor="name">Nome</label>
                     <input type="text" className="form-control" name="name" value={uname} onChange={e => setName(e.target.value)} placeholder="insersci il nuovo nome"/>
