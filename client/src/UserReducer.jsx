@@ -5,7 +5,7 @@ import { act } from "react";
 
 const userSlice = createSlice({
     name: "users",
-    initialState: userList,
+    initialState: userList, // -> stato iniziale con gli utenti importati da Data.jsx
     reducers: {
         addUser: (state, action) => {
             /* console.log(action); */
